@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light" >
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,34 +13,147 @@
                         poppins: ['Poppins', 'sans-serif'],
                         anton: ['Anton', 'sans-serif'],
                     },
+                    keyframes: {
+                        fadeIn: {
+                          "0%": { opacity: "0" },
+                          "100%": { opacity: "1" }
+                        },
+                        slideUp: {
+                          "0%": { opacity: "0", transform: "translateY(40px)" },
+                          "100%": { opacity: "1", transform: "translateY(0)" }
+                        }
+                    },
+                    animation: {
+                        fadeIn: "fadeIn 1.2s ease-in-out forwards",
+                        slideUp: "slideUp 1s ease-out forwards"
+                    }
                 },
             },
         };
     </script>
-    <script defer src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <script defer src="script.js"></script>
 </head>
+
 <style>
-    :root {
-      --brand-bg: #ccEE55; /* Your custom bg color */
-    }
-  </style>
-<body class="font-poppins bg-white dark:bg-white-900 text-gray-900 light:text-white min-h-screen transition-all duration-300">
+  :root {
+    --brand-bg: #ccEE55; /* Your custom bg color */
+  }
 
+  /* Light mode styles */
+  .light {
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --card-bg: #f2f6fc;
+    --navbar-bg: #ffffff;
+    --hero-bg-from: #ffffff;
+    --hero-bg-to: #3b82f6;
+    --feature-bg: #f2f6fc;
+    --testimonial-bg: #f3f4f6;
+    --pricing-bg: #ffffff;
+    --cta-bg-from: #3b82f6;
+    --cta-bg-to: #1d4ed8;
+    --button-bg: #3b82f6;
+    --button-text: #ffffff;
+    --border-color: #e5e7eb;
+  }
+
+  /* Dark mode styles */
+  .dark {
+    --bg-color: #1f2937;
+    --text-color: #f9fafb;
+    --card-bg: #374151;
+    --navbar-bg: #111827;
+    --hero-bg-from: #1f2937;
+    --hero-bg-to: #1e40af;
+    --feature-bg: #374151;
+    --testimonial-bg: #111827;
+    --pricing-bg: #1f2937;
+    --cta-bg-from: #1e40af;
+    --cta-bg-to: #1e3a8a;
+    --button-bg: #4b5563;
+    --button-text: #f9fafb;
+    --border-color: #4b5563;
+  }
+
+  /* Apply variables */
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+
+  /* Scroll reveal base */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Navbar */
+  nav {
+    background-color: var(--navbar-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hero Section */
+  header {
+    background: linear-gradient(to right, var(--hero-bg-from), var(--hero-bg-to));
+  }
+
+  /* Features Section */
+  #features .flex > div {
+    background-color: var(--feature-bg);
+    border-color: var(--border-color);
+  }
+
+  /* Testimonials Section */
+  #testimonials {
+    background-color: var(--testimonial-bg);
+  }
+
+  /* Pricing Section */
+  section.bg-white {
+    background-color: var(--pricing-bg);
+  }
+
+  /* CTA Section */
+  section.bg-gradient-to-b {
+    background: linear-gradient(to bottom, var(--cta-bg-from), var(--cta-bg-to));
+  }
+
+  /* Buttons */
+  .bg-blue-500 {
+    background-color: var(--button-bg) !important;
+  }
+  .bg-blue-500:hover {
+    background-color: darken(var(--button-bg), 10%) !important;
+  }
+  .text-white {
+    color: var(--button-text) !important;
+  }
+
+  /* Footer */
+  footer {
+    border-color: var(--border-color);
+  }
+</style>
+
+<body class="font-poppins min-h-screen transition-all duration-300 animate-fadeIn">
     <!-- Navbar -->
-    <nav class="fixed top-10 left-1/2 transform -translate-x-1/2 w-3/5 bg-white dark:bg-white-900 shadow-lg z-0 rounded-full">
-
+    <nav class="fixed top-10 left-1/2 transform -translate-x-1/2 w-3/5 shadow-lg z-0 rounded-full">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
           <!-- Logo -->
-          <a href="#" class="text-2xl font-bold text-indigo-600">TaskMaster</a>
+          <a href="#" class="text-2xl font-bold text-blue-600">TaskMaster</a>
           
           <!-- Mobile Menu Button -->
           <button id="menu-toggle" class="md:hidden p-2 focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M4 6h16M4 12h16M4 18h16"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           </button>
           
@@ -50,43 +163,41 @@
             <a href="#features" class="hover:text-indigo-600 transition">Features</a>
             <a href="#testimonials" class="hover:text-indigo-600 transition">Testimonials</a>
             <a href="#pricing" class="hover:text-indigo-600 transition">Pricing</a>
-            <a href="#pricing" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Get Started</a>
+            <a href="#pricing" class="bg-gradient-to-b from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Get Started</a>
           </div>
       
           <!-- Theme Toggle Button -->
-          <button id="theme-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none">
+          <button id="theme-toggle" class="p-2 bg-gradient-to-b from-blue-500 to-blue-600 dark:bg-gray-700 rounded-full focus:outline-none">
             <span class="sr-only">Toggle theme</span>
-            <svg id="sun-icon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            <svg id="sun-icon" class="w-6 h-6 hidden text-white dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
             </svg>
             <svg id="moon-icon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
             </svg>
           </button>
         </div>
       
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800">
+        <div id="mobile-menu" class="hidden md:hidden">
           <div class="flex flex-col items-center space-y-4 py-4">
             <a href="#hero" class="hover:text-indigo-600 transition">Home</a>
             <a href="#features" class="hover:text-indigo-600 transition">Features</a>
             <a href="#testimonials" class="hover:text-indigo-600 transition">Testimonials</a>
             <a href="#pricing" class="hover:text-indigo-600 transition">Pricing</a>
-            <a href="#pricing" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Get Started</a>
+            <a href="#pricing" class="bg-red text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Get Started</a>
           </div>
         </div>
       </nav>
       
 
 <!-- Hero Section -->
-<header id="hero" class="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-white-500 to-blue-600 text-white text-center px-4 pt-16">
-    <h1 class="text-4xl md:text-7xl font-bold w-4/5 mb-4 text-black font-anton">
+<header id="hero" class="flex flex-col items-center justify-center h-screen text-center px-4 pt-16">
+    <h1 class="text-4xl md:text-7xl font-bold w-4/5 mb-4 font-anton">
       Welcome to TaskMaster <br>
       Your smart companion for task management
     </h1>
-    <p class="text-lg md:text-2xl text-black mb-8 max-w-2xl">
+    <p class="text-lg md:text-2xl mb-8 max-w-2xl">
       The ultimate SaaS tool for boosting your productivity. Manage tasks, collaborate with teams, and achieve more with ease.
     </p>
   
@@ -106,19 +217,18 @@
       </a>
     </div>
   
-    <!-- Bouncing Down Arrow -->
-    <a href="#features" class="mt-12 animate-bounce rounded-full border-2 border-white p-3 text-white hover:bg-black hover:text-blue-600 transition duration-300">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </a>
-  </header>
+<!-- Bouncing Down Arrow -->
+<div class="absolute bottom-10">
+  <a href="#features" class="animate-bounce rounded-full border-red-500 p-3 text-blue-500 hover:bg-red-500 hover:text-white transition duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </a>
+</div>
+</header>
   
-      
-
-   <!-- Features Section -->
+<!-- Features Section -->
 <section id="features" class="py-40 px-4 md:px-8 lg:px-16 text-center">
-  
     <!-- Section Label -->
     <p class="text-blue-500 font-medium mb-2">• Key Features</p>
     
@@ -137,7 +247,7 @@
     <!-- Feature Cards -->
     <div class="flex flex-wrap justify-center gap-8">
       <!-- Card 1 -->
-      <div class="p-6 rounded-lg shadow-lg border-8 border-white flex flex-col items-center max-w-sm" style="background-color: #F2F6FC;">
+      <div class="p-6 rounded-lg shadow-lg border-8 border-white flex flex-col items-center max-w-sm">
         <svg class="w-12 h-12 mb-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
         </svg>
@@ -145,10 +255,8 @@
         <p class="text-center">Organize your tasks efficiently with intuitive drag-and-drop interfaces.</p>
     </div>
     
-    
-      
-      <!-- Card 2 -->
-      <div class="border-8 border-white p-6 rounded-lg shadow-lg flex flex-col items-center max-w-sm relative overflow-hidden" 
+    <!-- Card 2 -->
+    <div class="border-8 border-white p-6 rounded-lg shadow-lg flex flex-col items-center max-w-sm relative overflow-hidden" 
      style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6e178291eb/67a99b87523a1c85044d134b_Popular%20Bg.jpg'); 
             background-size: cover; 
             background-position: center; 
@@ -160,123 +268,107 @@
         <!-- Card content -->
         <div class="relative flex flex-col items-center">
             <svg class="w-12 h-12 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round"  stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0-12l5 5m0 0l5-5m-5 5V4"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0-12l5 5m0 0l5-5m-5 5V4"></path>
             </svg>
             <h3 class="text-xl font-semibold text-white mb-2">Team Collaboration</h3>
             <p class="text-center text-white">Share tasks and communicate seamlessly with your team in real-time.</p>
         </div>
     </div>
 
-      
-      <!-- Card 3 -->
-      <div class="p-6 rounded-lg shadow-lg border-8 border-white flex flex-col items-center max-w-sm" style="background-color: #F2F6FC;"">
+    <!-- Card 3 -->
+    <div class="p-6 rounded-lg shadow-lg border-8 border-white flex flex-col items-center max-w-sm">
         <svg class="w-12 h-12 mb-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
         </svg>
         <h3 class="text-xl font-semibold mb-2">Analytics & Insights</h3>
         <p class="text-center">Track progress with detailed reports and performance metrics.</p>
-      </div>
     </div>
-  </section>
-  
-
-    <!-- Testimonials Section -->
-<section id="testimonials" 
-class="py-40 px-4 md:px-8 lg:px-16 bg-gray-100 dark:bg-gray-800 bg-cover text-center bg-center bg-no-repeat" 
-style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6e178291eb/67a6ee3fb792665bb7d47815_Our%20Process%20Bg.jpg');">
-      <!-- Section Label -->
-      <p class="text-white font-medium  mb-2"> <span class="text-xxl">•</span> Testimonials</p>
-
-      <!-- Section Heading -->
-      <h2 class="text-3xl md:text-5xl text-white font-bold mb-4">
-        What Our <span class="text-white">Interns & Clients</span>
-        <span class="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-white">Say</span>
-      </h2>
-
-      <!-- Section Description -->
-      <p class="text-lg text-white max-w-2xl mx-auto mb-12">
-        Discover how our programs have impacted careers and organizations. These testimonials highlight real experiences 
-        from interns and partners who gained valuable skills, mentorship, and results through our initiatives.
-      </p>
-
-
-<!-- Testimonials Grid -->
-<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-      
-  <!-- Card 1 -->
-  <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
-    <p class="text-gray-700 text-lg mb-6 leading-relaxed">
-      “We tried them all, no other platform beats Tecko. It completely redesigned our workflow and improved results.”
-    </p>
-    <div class="flex items-center gap-4">
-      <img src="https://i.pravatar.cc/50?img=1" alt="avatar" class="w-12 h-12 rounded-full">
-      <div>
-        <h4 class="font-bold text-gray-900">MixiGaming</h4>
-        <p class="text-sm text-gray-500">CEO, TaxiHub</p>
-      </div>
     </div>
-  </div>
-  
-
-  <!-- Card 2 -->
-  <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
-    <p class="text-gray-700 text-lg mb-6">
-      “Focus your team on strategic work by automating up to 90% of manual tasks. Stop firefighting by empowering users.”
-    </p>
-    <div class="flex items-center gap-4">
-      <img src="https://i.pravatar.cc/50?img=2" alt="avatar" class="w-12 h-12 rounded-full">
-      <div>
-        <h4 class="font-bold text-gray-900">Olivia Nguyen</h4>
-        <p class="text-sm text-gray-500">Manager @Logoipsum</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
-    <p class="text-gray-700 text-lg mb-6">
-      “Managing our operations felt like an uphill battle until now. The tools helped us stay organized and efficient.”
-    </p>
-    <div class="flex items-center gap-4">
-      <img src="https://i.pravatar.cc/50?img=3" alt="avatar" class="w-12 h-12 rounded-full">
-      <div>
-        <h4 class="font-bold text-gray-900">Dr. James Patel</h4>
-        <p class="text-sm text-gray-500">Clinical Director</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
-    <p class="text-gray-700 text-lg mb-6">
-      “Managing our operations felt like an uphill battle until now. The tools helped us stay organized and efficient.”
-    </p>
-    <div class="flex items-center gap-4">
-      <img src="https://i.pravatar.cc/50?img=3" alt="avatar" class="w-12 h-12 rounded-full">
-      <div>
-        <h4 class="font-bold text-gray-900">Dr. James Patel</h4>
-        <p class="text-sm text-gray-500">Clinical Director</p>
-      </div>
-    </div>
-  </div>
-
-
-</div>
 </section>
 
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-40 px-4 md:px-8 lg:px-16 bg-cover text-center bg-center bg-no-repeat">
+    <!-- Section Label -->
+    <p class="text-white font-medium mb-2"><span class="text-xl">•</span> Testimonials</p>
 
+    <!-- Section Heading -->
+    <h2 class="text-3xl md:text-5xl text-white font-bold mb-4">
+        What Our <span class="text-white">Interns & Clients</span>
+        <span class="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-white">Say</span>
+    </h2>
 
-    <!-- Pricing Section -->
-     
-<section class="py-40 bg-white">
+    <!-- Section Description -->
+    <p class="text-lg text-white max-w-2xl mx-auto mb-12">
+        Discover how our programs have impacted careers and organizations. These testimonials highlight real experiences 
+        from interns and partners who gained valuable skills, mentorship, and results through our initiatives.
+    </p>
+
+    <!-- Testimonials Grid -->
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <!-- Card 1 -->
+    <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
+        <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+        “We tried them all, no other platform beats Tecko. It completely redesigned our workflow and improved results.”
+        </p>
+        <div class="flex items-center gap-4">
+        <img src="https://i.pravatar.cc/50?img=1" alt="avatar" class="w-12 h-12 rounded-full">
+        <div>
+            <h4 class="font-bold text-gray-900">MixiGaming</h4>
+            <p class="text-sm text-gray-500">CEO, TaxiHub</p>
+        </div>
+        </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
+        <p class="text-gray-700 text-lg mb-6">
+        “Focus your team on strategic work by automating up to 90% of manual tasks. Stop firefighting by empowering users.”
+        </p>
+        <div class="flex items-center gap-4">
+        <img src="https://i.pravatar.cc/50?img=2" alt="avatar" class="w-12 h-12 rounded-full">
+        <div>
+            <h4 class="font-bold text-gray-900">Olivia Nguyen</h4>
+            <p class="text-sm text-gray-500">Manager @Logoipsum</p>
+        </div>
+        </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
+        <p class="text-gray-700 text-lg mb-6">
+        “Managing our operations felt like an uphill battle until now. The tools helped us stay organized and efficient.”
+        </p>
+        <div class="flex items-center gap-4">
+        <img src="https://i.pravatar.cc/50?img=3" alt="avatar" class="w-12 h-12 rounded-full">
+        <div>
+            <h4 class="font-bold text-gray-900">Dr. James Patel</h4>
+            <p class="text-sm text-gray-500">Clinical Director</p>
+        </div>
+        </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-7 rounded-2xl shadow-sm hover:shadow-md transition">
+        <p class="text-gray-700 text-lg mb-6">
+        “Managing our operations felt like an uphill battle until now. The tools helped us stay organized and efficient.”
+        </p>
+        <div class="flex items-center gap-4">
+        <img src="https://i.pravatar.cc/50?img=3" alt="avatar" class="w-12 h-12 rounded-full">
+        <div>
+            <h4 class="font-bold text-gray-900">Dr. James Patel</h4>
+            <p class="text-sm text-gray-500">Clinical Director</p>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="py-40">
   <div class="max-w-6xl mx-auto px-6 text-center">
-
     <!-- Section Label -->
     <p class="text-blue-500 font-medium mb-2">• Pricing</p>
     
     <!-- Section Heading -->
     <h2 class="text-3xl md:text-5xl font-bold mb-4">
-        Pricing Plans <span class="text-black"> And</span> 
+        Pricing Plans <span class="text-black">And</span> 
       <span class="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">Options</span>
     </h2>
     
@@ -298,9 +390,8 @@ style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6
 
     <!-- Pricing Cards -->
     <div class="grid gap-12 md:grid-cols-3 items-center">
-      
       <!-- Card 1 -->
-      <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-8 rounded-2xl border-8 border-white  shadow-md transform rotate-[-8deg] hover:rotate-0 transition">
+      <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-8 rounded-2xl border-8 border-white shadow-md transform rotate-[-8deg] hover:rotate-0 transition">
         <div class="text-4xl font-bold text-black mb-2">
           $99<span class="text-lg font-normal text-gray-600">/Monthly</span>
         </div>
@@ -310,9 +401,8 @@ style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6
           Get Started →
         </button>
       </div>
-
       <!-- Card 2 (Popular) -->
-      <div class="relative bg-gradient-to-b border-8 border-white from-blue-500 to-blue-600 text-white p-10 rounded-2xl shadow-xl scale-105">
+      <div class="relative bg-gradient-to-b from-blue-500 to-blue-600 text-white p-10 rounded-2xl shadow-xl scale-105">
         <span class="absolute top-4 right-4 bg-white text-blue-600 text-xs font-medium px-3 py-1 rounded-full shadow">
           Popular
         </span>
@@ -325,9 +415,8 @@ style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6
           Get Started →
         </button>
       </div>
-
       <!-- Card 3 -->
-      <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 border-8 border-white to-white p-8 rounded-2xl shadow-md transform rotate-[7deg] hover:rotate-0 transition">
+      <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-8 rounded-2xl border-8 border-white shadow-md transform rotate-[7deg] hover:rotate-0 transition">
         <div class="text-4xl font-bold text-black mb-2">
           $83<span class="text-lg font-normal text-gray-600">/Monthly</span>
         </div>
@@ -337,72 +426,80 @@ style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6
           Get Started →
         </button>
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- CTA Section -->
+<section class="py-32 px-2">
+  <div class="max-w-6xl mx-auto relative rounded-3xl text-center text-white px-8 py-24 overflow-hidden shadow-lg">
+    <!-- Heading -->
+    <h2 class="text-5xl md:text-5xl font-bold mb-4">
+      Ready to Boost Your
+      <br />
+      <span class="text-white">Productivity?</span>
+    </h2>
+    <!-- Subheading -->
+    <p class="text-lg text-blue-100 mb-8">
+      Join thousands of satisfied users and start managing your tasks like a pro today.
+    </p>
+    <!-- Email Form -->
+    <form class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto">
+      <input 
+        type="email" 
+        placeholder="Enter your email" 
+        class="w-full sm:flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
+      />
+      <button 
+        type="submit" 
+        class="px-8 py-3 bg-white text-blue-600 font-semibold rounded-full shadow hover:bg-blue-100 transition"
+      >
+        Sign Up Free
+      </button>
+    </form>
+  </div>
+</section>
 
+<!-- Footer -->
+<footer class="border-t py-6">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between text-sm">
+    <!-- Left: Copyright -->
+    <p class="text-center md:text-left">
+      © 2025 Copyright - 
+      <a href="#" class="text-blue-600 hover:underline">Fictional</a> | 
+      Designed by <span class="italic">Tony Blaise Bimenyimana</span> | 
+      <a href="#" class="text-blue-600 hover:underline">License</a> | 
+      Powered by <a href="#" class="text-blue-600 hover:underline">TaskMaster</a>
+    </p>
+    <!-- Right: Back to top -->
+    <a href="#top" class="hidden md:flex items-center text-blue-500 hover:text-blue-700 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </a>
+  </div>
+</footer>
 
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  const html = document.documentElement;
 
-    <!-- CTA Section -->
+  themeToggle.addEventListener('click', () => {
+    if (html.classList.contains('light')) {
+      html.classList.remove('light');
+      html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      html.classList.remove('dark');
+      html.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    }
+  });
 
-    <section class="py-32 px-2">
-      <div class="max-w-6xl mx-auto relative bg-gradient-to-b from-blue-500 to-blue-600 rounded-3xl text-center text-white px-8 py-24 relative overflow-hidden shadow-lg">
-        
-        <!-- Heading -->
-        <h2 class="text-5xl md:text-5xl font-bold mb-4">
-          Ready to Boost Your
-          <br />
-          <span class="text-white">Productivity?</span>
-        </h2>
-    
-        <!-- Subheading -->
-        <p class="text-lg text-blue-100 mb-8">
-          Join thousands of satisfied users and start managing your tasks like a pro today.
-        </p>
-    
-        <!-- Email Form -->
-        <form class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto">
-          <input 
-            type="email" 
-            placeholder="Enter your email" 
-            class="w-full sm:flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          />
-          <button 
-            type="submit" 
-            class="px-8 py-3 bg-white text-blue-600 font-semibold rounded-full shadow hover:bg-blue-100 transition"
-          >
-            Sign Up Free
-          </button>
-        </form>
-    
-      </div>
-    </section>
-    
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-200 py-6 relative">
-      <div class="max-w-6xl mx-auto  flex flex-col md:flex-row items-center justify-between text-sm text-gray-600">
-        
-        <!-- Left: Copyright -->
-        <p class="text-center md:text-left">
-          © 2025 Copyright - 
-          <a href="#" class="text-blue-600 hover:underline">Fictional</a> | 
-          Designed by <span class="italic">Tony Blaise Bimenyimana</span> | 
-          <a href="#" class="text-blue-600 hover:underline">License</a> | 
-          Powered by <a href="#" class="text-blue-600 hover:underline">TaskMaster</a>
-        </p>
-    
-        <!-- Right: Back to top -->
-        <a href="#top" class="hidden md:flex items-center text-blue-500 hover:text-blue-700 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-          </svg>
-        </a>
-    
-      </div>
-    </footer>
-    
+  // Load saved theme or default to light
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  html.classList.add(savedTheme);
+</script>
 </body>
 </html>
