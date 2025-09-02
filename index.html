@@ -98,6 +98,10 @@
   nav {
     background-color: var(--navbar-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100 !important;
+  }
+  #pricing_cards{
+    z-index: 0 !important;
   }
 
   /* Hero Section */
@@ -105,6 +109,9 @@
     background: linear-gradient(to right, var(--hero-bg-from), var(--hero-bg-to));
   }
 
+  #features{
+    z-index: 10; /* Lower than nav's z-index: 1000 */
+  }
   /* Features Section */
   #features .flex > div {
     background-color: var(--feature-bg);
@@ -134,7 +141,10 @@
     background-color: var(--button-bg) !important;
   }
   .bg-blue-500:hover {
-    background-color: darken(var(--button-bg), 10%) !important;
+    /* background-color: darken(var(--button-bg), 100%) !important; */
+  }
+  #pricing{
+    z-index: 0;
   }
   .text-white {
     color: var(--button-text) !important;
@@ -248,7 +258,7 @@
     </p>
   
     <!-- Feature Cards -->
-    <div class="flex flex-wrap justify-center gap-8">
+    <div class="flex flex-wrap justify-center gap-8 ">
       <!-- Card 1 -->
       <div class="p-6 rounded-lg shadow-lg border-8 border-white flex flex-col items-center max-w-sm">
         <svg class="w-12 h-12 mb-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -259,7 +269,7 @@
     </div>
     
     <!-- Card 2 -->
-    <div class="border-8 border-white p-6 rounded-lg shadow-lg flex flex-col items-center max-w-sm relative overflow-hidden" 
+    <div class="border-8 border-white p-6 rounded-lg shadow-lg flex flex-col items-center max-w-sm overflow-hidden" 
      style="background-image: url('https://cdn.prod.website-files.com/67a2fb4308b45c6e178291eb/67a99b87523a1c85044d134b_Popular%20Bg.jpg'); 
             background-size: cover; 
             background-position: center; 
@@ -269,7 +279,7 @@
         <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-10 rounded-lg"></div>
 
         <!-- Card content -->
-        <div class="relative flex flex-col items-center">
+        <div class=" flex flex-col items-center">
             <svg class="w-12 h-12 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0-12l5 5m0 0l5-5m-5 5V4"></path>
             </svg>
@@ -364,7 +374,7 @@
 </section>
 
 <!-- Pricing Section -->
-<section class="py-40">
+<section id="pricing"class="py-40">
   <div class="max-w-6xl mx-auto px-6 text-center">
     <!-- Section Label -->
     <p class="text-blue-500 font-medium mb-2">• Pricing</p>
@@ -392,27 +402,27 @@
     </div>
 
     <!-- Pricing Cards -->
-    <div class="grid gap-12 md:grid-cols-3 items-center">
+    <div id="pricing_cards" class="grid gap-12 md:grid-cols-3 items-center">
       <!-- Card 1 -->
       <div class="bg-gradient-to-br from-blue-300 via-white to-blue-300 p-8 rounded-2xl border-8 border-white shadow-md transform rotate-[-8deg] hover:rotate-0 transition">
         <div class="text-4xl font-bold text-black mb-2">
           $99<span class="text-lg font-normal text-gray-600">/Monthly</span>
         </div>
-        <h3 class="text-xl font-semibold mb-2">Monthly</h3>
+        <h3  class="text-xl text-black font-semibold mb-2">Monthly</h3>
         <p class="text-gray-500 mb-6">Payment of $99 every month</p>
         <button class="px-6 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium shadow">
           Get Started →
         </button>
       </div>
       <!-- Card 2 (Popular) -->
-      <div class="relative bg-gradient-to-b from-blue-500 to-blue-600 text-white p-10 rounded-2xl shadow-xl scale-105">
+      <div class=" bg-gradient-to-b from-blue-500 to-blue-600 text-white p-10 rounded-2xl shadow-xl scale-105">
         <span class="absolute top-4 right-4 bg-white text-blue-600 text-xs font-medium px-3 py-1 rounded-full shadow">
           Popular
         </span>
         <div class="text-4xl font-bold mb-2">
           $92<span class="text-lg font-normal opacity-80">/Monthly</span>
         </div>
-        <h3 class="text-xl font-semibold mb-2">Quarterly</h3>
+        <h3 class="text-xl font-semibold mb-2 text-black">Quarterly</h3>
         <p class="opacity-80 mb-6">Payment of $275 every 3 months</p>
         <button class="px-6 py-2 rounded-full bg-white text-blue-600 hover:bg-gray-100 font-medium shadow">
           Get Started →
@@ -423,7 +433,7 @@
         <div class="text-4xl font-bold text-black mb-2">
           $83<span class="text-lg font-normal text-gray-600">/Monthly</span>
         </div>
-        <h3 class="text-xl font-semibold mb-2">Annual</h3>
+        <h3 class="text-xl font-semibold text-black mb-2">Annual</h3>
         <p class="text-gray-500 mb-6">Payment of $998 each year</p>
         <button class="px-6 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium shadow">
           Get Started →
@@ -435,7 +445,7 @@
 
 <!-- CTA Section -->
 <section class="py-32 px-2">
-  <div class="max-w-6xl mx-auto relative rounded-3xl text-center text-white px-8 py-24 overflow-hidden shadow-lg">
+  <div class="max-w-6xl mx-auto bg-gradient-to-b from-blue-500 to-blue-600  rounded-3xl text-center text-white px-8 py-24 overflow-hidden shadow-lg">
     <!-- Heading -->
     <h2 class="text-5xl md:text-5xl font-bold mb-4">
       Ready to Boost Your
@@ -469,8 +479,7 @@
     <!-- Left: Copyright -->
     <p class="text-center md:text-left">
       © 2025 Copyright - 
-      <a href="#" class="text-blue-600 hover:underline">Fictional</a> | 
-      Designed by <span class="italic">Tony Blaise Bimenyimana</span> | 
+      Designed with 💖 by <span class="italic">Tony Blaise Bimenyimana</span> | 
       <a href="#" class="text-blue-600 hover:underline">License</a> | 
       Powered by <a href="#" class="text-blue-600 hover:underline">TaskMaster</a>
     </p>
